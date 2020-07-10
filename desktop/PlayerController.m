@@ -3,13 +3,15 @@ classdef PlayerController
         gecko % the player object
         bugs % a bug object
         net
+        worldSize = [1080 1080 1080]
+        maxBugSpeed = 5;
     end
     methods
         % constructor
         function obj = PlayerController()
-            obj.gecko = player;
-            obj.bugs = [];
-            obj.net = NetworkController("123");
+            obj.gecko = player();
+            obj.bugs = (bug(obj.worldSize, obj.maxBugSpeed));
+            obj.net = NetworkController("192.168.0.230");
         end
         
         % updates the accelerations
@@ -29,6 +31,10 @@ classdef PlayerController
         
         % update the physics of the gecko
         function obj = updateValues(obj)
+            for bug = [1, length(obj.bugs)]
+                obj.bugs(bug) = obj.bugs(bug).update();
+            end
+            
             obj = obj.updateAccel();
             obj = obj.updateVelocity();
             obj = obj.updatePosition();
@@ -38,6 +44,10 @@ classdef PlayerController
         function obj = updateScore(obj, collidedObject)
            obj.gecko.Score = obj.gecko.Score + collidedObject.PointValue; 
            obj.gecko.Size = obj.gecko.Size + collidedObject.SizeIncrease;
+        end
+        
+        function obj = createRandomBug(obj)
+            obj.bugs(end + 1) = bug(obj.worldSize, obj.maxBugSpeed);
         end
     end
 end
