@@ -1,9 +1,9 @@
 classdef SuperBug
     % bug super class
-    properties
+    properties (Access = private)
         Sprite % if we use sprites
         Color % if we use colors/shapes
-        PointValue = 5; % how many points the item is worth
-        SizeIncrease = 1; % how many units the gecko grows if we do that
+        PointValue % how many points the item is worth
+        SizeIncrease % how many units the gecko grows if we do that
     end
 end

@@ -1,12 +1,13 @@
 classdef PlayerController
     properties
         gecko = player; % the player object
-        buggo = SuperBug; %a bug object
+        buggo = xBug; %a bug object
+        buggo2 = bug;
     end
     methods
         function obj = updateAccel(obj)
             % Call cam's functions
-            %A = newA();
+            % A = newA();
             obj.gecko.A = [0.5,-1,1];
         end
         
@@ -24,7 +25,7 @@ classdef PlayerController
             obj = obj.updatePosition();
         end
         
-        function obj = UpdateScore(obj, collidedObject)
+        function obj = updateScore(obj, collidedObject)
            obj.gecko.Score = obj.gecko.Score + collidedObject.PointValue; 
            obj.gecko.Size = obj.gecko.Size + collidedObject.SizeIncrease;
         end

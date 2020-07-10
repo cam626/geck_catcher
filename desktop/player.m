@@ -8,7 +8,7 @@ classdef player
         Sprite % sprite image data if we go that way
         Color % Gecko color if we use shapes
         Score = 0; % The player's current score
-        Size % If we are growing like in the snake game
+        Size = 1; % If we are growing like in the snake game
     end
 end
 

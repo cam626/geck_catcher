@@ -1,6 +1,6 @@
 classdef bug < SuperBug
-    methods
-    end
     properties
+        PointValue = 10;
+        SizeIncrease = 1;
     end
 end
