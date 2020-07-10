@@ -46,7 +46,7 @@ classdef GeckoView
             end
             
             for i = 1 : length(to_add)
-                obj.add_bug(to_add(i));
+                obj.add_bug(to_add(i), controller.getWorldSize());
             end
             
             to_remove = setdiff(obj.bug_nodes.keys(), all_positions);
@@ -61,10 +61,13 @@ classdef GeckoView
            delete(node);
         end
         
-        function add_bug(obj, bug)
-           % TODO implement
-           % TODO add newly created node to array
-           % obj.bug_nodes(bug.getPosition()) = bug_node
+        function add_bug(obj, size, bug)
+           bug_node = vrimport(obj.world, "desktop/assets/bug.STL");
+           % TODO is this the correct scale
+           position = normalize_position(bug.getPosition(), size);
+           bug_node.translation = to_world_space(position);
+           bug_node.scale = [0.5 0.5 0.5];
+           obj.bug_nodes(bug.getPosition()) = bug_node;
         end
         
         function place_gecko(obj, position, velocity)
