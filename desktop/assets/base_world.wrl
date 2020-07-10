@@ -1,0 +1,114 @@
+#VRML V2.0 utf8
+
+#Created with V-Realm Builder v2.0
+#Integrated Data Systems Inc.
+#www.ids-net.com
+
+
+DirectionalLight {
+	color	0.806391 0.940514 1
+	intensity	0.3
+}
+DirectionalLight {
+	ambientIntensity	0.1
+	color	1 0.992785 0.971138
+	direction	0 -3.3 -1.3
+}
+Transform {
+	translation	0 1 15
+	children Shape {
+		appearance	Appearance {
+			material	Material {
+				diffuseColor	1 1 1
+			}
+
+		}
+
+		geometry	Box {
+			size	30 2 2
+		}
+
+	}
+}
+Transform {
+	translation	15 1 0
+	children Shape {
+		appearance	Appearance {
+			material	Material {
+			}
+
+		}
+
+		geometry	Box {
+			size	2 2 30
+		}
+
+	}
+}
+Transform {
+	translation	0 1 -15
+	children Shape {
+		appearance	Appearance {
+			material	Material {
+			}
+
+		}
+
+		geometry	Box {
+			size	30 2 2
+		}
+
+	}
+}
+Transform {
+	translation	-15 0.999995 0
+	children Shape {
+		appearance	Appearance {
+			material	Material {
+				diffuseColor	1 1 1
+			}
+
+		}
+
+		geometry	Box {
+			size	2 2 30
+		}
+
+	}
+}
+Background {
+	groundAngle	[ 0.9, 1.5, 1.57 ]
+	groundColor	[ 0 0.8 0,
+			  0.82 0.808867 0.638987,
+			  0.82 0.816865 0.624842,
+			  0.626761 0.67 0.656715 ]
+	skyAngle	[ 0.1, 1.2, 1.57 ]
+	skyColor	[ 0.76238 0.8 0.1427,
+			  0.277798 0.219779 0.7,
+			  0.222549 0.390234 0.7,
+			  0.60094 0.662637 0.69 ]
+}
+Viewpoint {
+	fieldOfView	0.785398
+	jump	TRUE
+	orientation	-0.994024 -0.0116821 0.108538  0.136539
+	position	-0.300564 3.71097 26.9522
+}
+Transform {
+	translation	-1.81985e-013 -0.005 -2.38419e-006
+	rotation	0 0 1  0
+	scale	0.999998 0.999998 0.999996
+	children Shape {
+		appearance	Appearance {
+			material	Material {
+				diffuseColor	0.8 0.781306 0.636735
+			}
+
+		}
+
+		geometry	Box {
+			size	30 0.05 30
+		}
+
+	}
+}

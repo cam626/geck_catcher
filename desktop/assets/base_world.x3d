@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.3//EN" "http://www.web3d.org/specifications/x3d-3.3.dtd">
+<X3D profile='Immersive' version='3.3' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
+<head>
+</head>
+<Scene>
+<WorldInfo title='geck catcher'>
+</WorldInfo>
+<NavigationInfo type='"EXAMINE" ' headlight='false'>
+</NavigationInfo>
+<DirectionalLight color='0.806391 0.940514 1' intensity='0.3'>
+</DirectionalLight>
+<DirectionalLight direction='0 -3.3 -1.3' ambientIntensity='0.1' color='1 0.992785 0.971138'>
+</DirectionalLight>
+<Transform translation='0 1 15'>
+  <Shape>
+    <Appearance>
+      <Material diffuseColor='1 1 1'>
+      </Material>
+    </Appearance>
+    <Box size='30 2 2'>
+    </Box>
+  </Shape>
+</Transform>
+<Transform translation='15 1 0'>
+  <Shape>
+    <Appearance>
+      <Material>
+      </Material>
+    </Appearance>
+    <Box size='2 2 30'>
+    </Box>
+  </Shape>
+</Transform>
+<Transform translation='0 1 -15'>
+  <Shape>
+    <Appearance>
+      <Material>
+      </Material>
+    </Appearance>
+    <Box size='30 2 2'>
+    </Box>
+  </Shape>
+</Transform>
+<Transform translation='-15 0.999995 0'>
+  <Shape>
+    <Appearance>
+      <Material diffuseColor='1 1 1'>
+      </Material>
+    </Appearance>
+    <Box size='2 2 30'>
+    </Box>
+  </Shape>
+</Transform>
+<Background groundAngle='0.9 1.5 1.57' groundColor='0 0.8 0 0.82 0.808867 0.638987 0.82 0.816865 0.624842 0.626761 0.67 0.656715' skyAngle='0.1 1.2 1.57' skyColor='0.76238 0.8 0.1427 0.277798 0.219779 0.7 0.222549 0.390234 0.7 0.60094 0.662637 0.69'>
+</Background>
+<Transform DEF='Floor' translation='-1.81985e-13 -0.005 -2.38419e-06' scale='0.999998 0.999998 0.999996' rotation='1 1 1 0'>
+  <Shape>
+    <Appearance>
+      <Material diffuseColor='0.8 0.781306 0.636735'>
+      </Material>
+    </Appearance>
+    <Box size='30 0.05 30'>
+    </Box>
+  </Shape>
+</Transform>
+<Viewpoint DEF='BaseCamera' description='base_camera' position='-0.988979 45.1671 13.7417' orientation='-0.999984 0.00457058 0.00320539 1.29824' fieldOfView='0.8'>
+</Viewpoint>
+</Scene>
+</X3D>
