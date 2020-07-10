@@ -57,11 +57,14 @@ classdef GeckoView
         
         function remove_bug(obj, old_position)
            node = obj.bug_nodes(old_position);
+           remove(obj.bug_nodes, old_position);
            delete(node);
         end
         
         function add_bug(obj, bug)
-           % TODO implement 
+           % TODO implement
+           % TODO add newly created node to array
+           % obj.bug_nodes(bug.getPosition()) = bug_node
         end
         
         function place_gecko(obj, position, velocity)
