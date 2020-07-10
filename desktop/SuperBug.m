@@ -11,6 +11,7 @@ classdef SuperBug
         worldWidth
         worldHeight
         worldDepth
+        size = 50;
     end
     
     methods
@@ -23,7 +24,7 @@ classdef SuperBug
             obj.V = -1 * maxSpeed / 2 + maxSpeed*rand(1, 3);
         end
         
-        function obj = update(obj)
+        function obj = update(obj, dt)
             if obj.P(1) + obj.V(1) > obj.worldWidth
                 obj.P(1) = obj.worldWidth;
                 obj.V(1) = obj.V(1) * -1;
@@ -54,11 +55,15 @@ classdef SuperBug
                 obj.V(3) = obj.V(3) * -1;
             end
             
-            obj.P = obj.P + obj.V;
+            obj.P = obj.P + obj.V * dt;
         end
         
         function pos = getPosition(obj)
             pos = obj.P;
+        end
+        
+        function s = getSize(obj)
+            s = obj.size;
         end
     end
 end
