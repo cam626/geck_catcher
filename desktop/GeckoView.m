@@ -2,7 +2,7 @@ classdef GeckoView
     properties
         world % vrworld scene tree
         gecko % player transform node
-        % TODO add bug node fields
+        bug_nodes % associative array of 3d pos => bug scene nodes
     end
     
     methods
@@ -14,7 +14,13 @@ classdef GeckoView
             obj.gecko = vrimport(obj.world, "desktop/assets/gecko.STL");
             obj.gecko.scale = [0.07 0.07 0.07];
             obj.world.gecko_even_better_Material.diffuseColor = [0.2 1 0.4];
+            % TODO: this needs an inner transform to correct its position
+            % to center it in world space
+            % http://edutechwiki.unige.ch/en/X3D_grouping_and_transforms
             obj.place_gecko([0 0 0], [0 0 -1]);
+            
+            % Initialize bugs map
+            obj.bug_nodes = containers.Map;
             
             view(obj.world);
         end
@@ -25,7 +31,40 @@ classdef GeckoView
             gecko_velocity = controller.getGecko().getVelocity();
             obj.place_gecko(gecko_position, gecko_velocity);
             
-            % TODO implement bug updating/adding/removal
+            % I'm not super sure if any of this works since I've never used
+            % maps/lists/arrays/sets in matlab before
+            new_list = controller.getBugs();
+            to_add = {};
+            all_positions = {};
+            for i = 1 : length(new_list)
+                new_bug = new_list(i);
+                position = new_bug.getPosition();
+                all_positions = {all_positions; position};
+                if ~isKey(obj.bug_nodes, new_bug.getPosition())
+                    to_add = {to_add; new_bug};
+                end
+            end
+            
+            for i = 1 : length(to_add)
+                obj.add_bug(to_add(i));
+            end
+            
+            to_remove = setdiff(obj.bug_nodes.keys(), all_positions);
+            for i = 1 : length(to_remove)
+               obj.remove_bug(to_remove(i));
+            end
+        end
+        
+        function remove_bug(obj, old_position)
+           node = obj.bug_nodes(old_position);
+           remove(obj.bug_nodes, old_position);
+           delete(node);
+        end
+        
+        function add_bug(obj, bug)
+           % TODO implement
+           % TODO add newly created node to array
+           % obj.bug_nodes(bug.getPosition()) = bug_node
         end
         
         function place_gecko(obj, position, velocity)
