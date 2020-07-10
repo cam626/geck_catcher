@@ -7,7 +7,7 @@ running = true;
 
 while running
     controller.updateValues(dt);
-    view.render();
+    view.update(controller);
     t = t + dt;
     
     if t > 60

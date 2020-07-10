@@ -13,7 +13,7 @@ classdef PlayerController
         function obj = PlayerController()
             obj.gecko = player();
             obj.bugs = (bug(obj.worldSize, obj.maxBugSpeed));
-            obj.net = NetworkController("10.0.0.107");%"192.168.0.230");
+            obj.net = NetworkController("192.168.1.241:8080");
         end
         
         % updates the accelerations

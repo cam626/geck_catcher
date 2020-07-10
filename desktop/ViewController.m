@@ -1,4 +1,4 @@
-classdef GeckoView
+classdef ViewController
     properties
         world % vrworld scene tree
         gecko % player transform node
@@ -6,7 +6,7 @@ classdef GeckoView
     end
     
     methods
-        function obj = GeckoView()
+        function obj = ViewController()
             obj.world = vrworld('desktop/assets/base_world.x3d', 'new');
             open(obj.world);
 
@@ -26,48 +26,52 @@ classdef GeckoView
         end
         
         function update(obj, controller)
-            gecko_position = normalize_position(controller.getGecko().getPosition(), ...
-                controller.getWorldSize());
-            gecko_velocity = controller.getGecko().getVelocity();
+            gecko_position = normalize_position(controller.gecko.getPosition(), ...
+                controller.worldSize);
+            gecko_velocity = controller.gecko.getVelocity();
             obj.place_gecko(gecko_position, gecko_velocity);
             
             % I'm not super sure if any of this works since I've never used
             % maps/lists/arrays/sets in matlab before
-            new_list = controller.getBugs();
+            new_list = controller.bugs;
             to_add = {};
             all_positions = {};
             for i = 1 : length(new_list)
                 new_bug = new_list(i);
                 position = new_bug.getPosition();
-                all_positions = {all_positions; position};
-                if ~isKey(obj.bug_nodes, new_bug.getPosition())
-                    to_add = {to_add; new_bug};
+                all_positions{length(all_positions)+1} = make_key(position);
+                if ~isKey(obj.bug_nodes, make_key(new_bug.getPosition()))
+                    to_add{length(to_add)+1} = new_bug;
                 end
             end
             
             for i = 1 : length(to_add)
-                obj.add_bug(to_add(i), controller.getWorldSize());
+                obj.add_bug(to_add{i}, controller.worldSize);
             end
             
-            to_remove = setdiff(obj.bug_nodes.keys(), all_positions);
+            % TODO how does matlab work?
+            a = cell2mat(obj.bug_nodes.keys());
+            to_remove = setdiff(cell2mat(obj.bug_nodes.keys()), cell2mat(all_positions));
             for i = 1 : length(to_remove)
                obj.remove_bug(to_remove(i));
             end
         end
         
-        function remove_bug(obj, old_position)
-           node = obj.bug_nodes(old_position);
-           remove(obj.bug_nodes, old_position);
+        function remove_bug(obj, oldpos_key)
+           node = obj.bug_nodes(oldpos_key);
+           remove(obj.bug_nodes, oldpos_key);
            delete(node);
         end
         
-        function add_bug(obj, size, bug)
+        function add_bug(obj, bug, size)
            bug_node = vrimport(obj.world, "desktop/assets/bug.STL");
            % TODO is this the correct scale
            position = normalize_position(bug.getPosition(), size);
            bug_node.translation = to_world_space(position);
-           bug_node.scale = [0.5 0.5 0.5];
-           obj.bug_nodes(bug.getPosition()) = bug_node;
+           % TODO rotate/scale/transform correctly to normalize
+           % (might need inner transform)
+           bug_node.scale = [0.02 0.02 0.02];
+           obj.bug_nodes(make_key(bug.getPosition())) = bug_node;
         end
         
         function place_gecko(obj, position, velocity)
@@ -89,6 +93,10 @@ end
 function pos = normalize_position(position, size)
     unit_pos = [position(1)/size(1) position(2)/size(2) position(3)/size(3)];
     pos = (unit_pos * 2) + [-1 -1 -1];
+end
+
+function key = make_key(vec)
+    key = strcat("key__", num2str(vec(1)), "&&", num2str(vec(2)), "##", num2str(vec(3)));
 end
 
 function pos = to_world_space(position)
