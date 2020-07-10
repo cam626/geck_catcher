@@ -7,8 +7,7 @@ classdef player
         P = [0 0 0]; % Position Vector
         Sprite % sprite image data if we go that way
         Color % Gecko color if we use shapes
-        Score = 0; % The player's current score
-        Size = 1; % If we are growing like in the snake game
+        size = 100; % If we are growing like in the snake game
     end
     
     methods
@@ -22,6 +21,10 @@ classdef player
         
         function acc = getAcceleration(obj)
             acc = obj.A;
+        end
+        
+        function s = getSize(obj)
+            s = obj.size;
         end
     end
 end
