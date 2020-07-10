@@ -1,15 +1,20 @@
 classdef PlayerController
     properties
-        gecko = player; % the player object
-        buggo = xBug; % a bug object
-        buggo2 = bug; % a second bug
+        gecko % the player object
+        bugs % a bug object
+        net
     end
     methods
+        % constructor
+        function obj = PlayerController()
+            obj.gecko = player;
+            obj.bugs = [];
+            obj.net = NetworkController("123");
+        end
+        
         % updates the accelerations
         function obj = updateAccel(obj)
-            % Call cam's functions
-            % A = newA();
-            obj.gecko.A = [0.5,-1,1];
+            obj.gecko.A = obj.net.getAcceleration();
         end
         
         % updates the velocity
